@@ -4,7 +4,7 @@
     $username = 'root';
 
     $password = '';
-    $database = 'surat';
+    $database = 'skripsi_nur';
 
     $konek = mysqli_connect($hostname,$username,$password,$database);
 ?>
