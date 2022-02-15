@@ -1,16 +1,13 @@
 <?php
  session_start();
- if (isset($_SESSION['password'])=="" || ($_SESSION['hak_akses'])=="" || ($_SESSION['username'])=="")  {
- header('location:login.php');
- }
- else{
- $hak_akses = $_SESSION['hak_akses'];
-  $nama = $_SESSION['nama'];
- $username = $_SESSION['username'];
- 
+ if (isset($_SESSION['password'])=="" || ($_SESSION['hak_akses'])=="")  {
+ 	header('location:../login.php');
+ }else{
+ 	$hak_akses = $_SESSION['hak_akses'];
  }
  ?>
 <?php include 'header.php'; ?>
+
 <!-- Sidebar -->
 		<div class="sidebar sidebar-style-2">			
 			<div class="sidebar-wrapper scrollbar scrollbar-inner">
@@ -27,11 +24,59 @@
 							</span>
 							<h4 class="text-section">fitur</h4>
 						</li>
+						
+						<?php if($hak_akses=="rt"){ ?>
+						<li class="nav-item">
+							<a href="?halaman=tampil_user">
+								<i class="fas fa-user-alt"></i>
+								<p>Data User</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="?halaman=permohonan_surat">
+								<i class="far fa-calendar-check"></i>
+								<p>Cetak Surat</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="?halaman=surat_dicetak">
+								<i class="far fa-calendar-check"></i>
+								<p>Surat Selesai</p>
+							</a>
+						</li>
 
-				
-						 <?php
-						 	if($hak_akses=="Warga RT01"){ /// Pemohon
-						 ?>
+						<?php }elseif ($hak_akses=="rw"){ ?>
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#tables">
+								<i class="fas fa-table"></i>
+								<p>Laporan</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="tables">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="?halaman=laporan_perbulan">
+											<span class="sub-item">Perbulan</span>
+										</a>
+									</li>
+									<li>
+										<a href="?halaman=laporan_pertahun">
+											<span class="sub-item">Pertahun</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+            <?php }elseif($hak_akses=="admin"){ ?>
+						<li class="nav-item">
+							<a href="?halaman=tampil_user">
+								<i class="fas fa-user-alt"></i>
+								<p>Data User</p>
+							</a>
+						</li>
+
+						<?php }elseif($hak_akses=="warga"){ ?>
 						<li class="nav-item">
 							<a href="?halaman=tampil_pemohon">
 								<i class="fas fa-user-alt"></i>
@@ -44,51 +89,67 @@
 								<p>Status Request</p>
 							</a>
 						</li>
-						<?php
-							}
-						?>
+
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#tables">
+								<i class="fas fa-table"></i>
+								<p>Permohonan</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="tables">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="?halaman=request_akta">
+											<span class="sub-item">Akta</span>
+										</a>
+									</li>
+									<li>
+										<a href="?halaman=request_kematian">
+											<span class="sub-item">Kematian</span>
+										</a>
+									</li>
+									<li>
+										<a href="?halaman=request_kk">
+											<span class="sub-item">Kartu Keluarga</span>
+										</a>
+									</li>
+									<li>
+										<a href="?halaman=request_ktp">
+											<span class="sub-item">KTP</span>
+										</a>
+									</li>
+									<li>
+										<a href="?halaman=request_pernikahan">
+											<span class="sub-item">Pernikahan</span>
+										</a>
+									</li>
+									<li>
+										<a href="?halaman=request_skck">
+											<span class="sub-item">SKCK</span>
+										</a>
+									</li>
+									<li>
+										<a href="?halaman=request_skd">
+											<span class="sub-item">SKD</span>
+										</a>
+									</li>
+									<li>
+										<a href="?halaman=request_sku">
+											<span class="sub-item">SKU</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<?php } ?>
+
 						<li class="mx-4 mt-2">
 							<a href="logout.php" class="btn btn-danger btn-block"><span class="btn-label mr-2"> <i class="icon-logout"></i> </span>Logout</a> 
 						</li>
 					</ul>
 				</div>
-			</li>
-        <?php
-              }else if($hak_akses=="Warga RT02"){
-						 ?>
-						<li class="nav-item">
-							<a href="?halaman=tampil_pemohon02">
-								<i class="fas fa-user-alt"></i>
-								<p>Biodata Anda</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="?halaman=tampil_status">
-								<i class="far fa-calendar-check"></i>
-								<p>Status Request</p>
-							</a>
-						</li>
-					</ul>
-				</div>
-				
 			</div>
 		</div>
-						<?php
-							}
-						?>
-						<li class="mx-4 mt-2">
-							<a href="logout.php" class="btn btn-danger btn-block"><span class="btn-label mr-2"> <i class="icon-logout"></i> </span>Logout</a> 
-						</li>
-					</ul>
-				</div>
-     </div>  
-    </div>
-  
-
-
-
-
-		
 		<!-- End Sidebar -->
 
 		<div class="main-panel">
@@ -102,27 +163,21 @@
               break;
               case 'ubah_pemohon';
                 include 'ubah_pemohon.php';
-              break;
-              case 'ubah_pemohon02';
-                include 'ubah_pemohon02.php';
 			  break;
 			  case 'tampil_pemohon';
                 include 'tampil_pemohon.php';
-         break;
-			  case 'tampil_pemohon02';
-                include 'tampil_pemohon02.php';
-			  break;
-			  case 'request_skd';
-                include 'request_skd.php';
 			  break;
 			  case 'request_skck';
                 include 'request_skck.php';
 			  break;
-			  case 'request_ktp'; //sku
+			  case 'request_ktp';
                 include 'request_ktp.php';
 			  break;
 			  case 'request_kk'; // skp
                 include 'request_kk.php';
+			  break;
+			  case 'request_skd';
+                include 'request_skd.php';
         break;
 			  case 'request_akta'; 
                 include 'request_akta.php';
@@ -132,6 +187,8 @@
         break;
 			  case 'request_kematian';
                 include 'request_kematian.php';
+
+
 			  break;
 			  case 'tampil_status';
                 include 'status_request.php';
@@ -140,7 +197,7 @@
                 include 'belum_acc_skck.php';
 			  break;
 			  case 'belum_acc_ktp';
-                include 'belum_acc_ktp.php'; //sku
+                include 'belum_acc_ktp.php'; // ktp sku
 			  break;
 			  case 'belum_acc_kk';
                 include 'belum_acc_kk.php';
@@ -156,6 +213,7 @@
          break;
 			  case 'belum_acc_kematian';
                 include 'belum_acc_kematian.php';
+
 			  break;
 			  case 'sudah_acc_skck';
                 include 'acc_skck.php';
@@ -176,7 +234,8 @@
                 include 'acc_pernikahan.php';
         break;
 			  case 'sudah_acc_kematian';
-                include 'acc_kematian.php';  
+                include 'acc_kematian.php'; 
+
 			  break;
 			  case 'detail_skck';
                 include 'detail_skck.php';
@@ -198,10 +257,11 @@
         break;
 			  case 'detail_kematian';
                 include 'detail_kematian.php';
+
 			  break;
 			  case 'cetak_skck';
                 include 'cetak_skck.php';
-        break;
+         break;
 			  case 'cetak_ktp';
                 include 'cetak_ktp.php';
         break;
@@ -219,60 +279,90 @@
         break;
 			  case 'cetak_kematian';
                 include 'cetak_kematian.php';
+
+
+
 			  break;
 			  case 'tampil_user';
                 include 'tampil_user.php';
-        break;
+			  break;
 			  case 'tampil_user02';
                 include 'tampil_user02.php';
 			  break;
 			  case 'tambah_user';
                 include 'tambah_user.php';
-        break;
-			  case 'tambah_user02';
+			  break;
+			   case 'tambah_user02';
                 include 'tambah_user02.php';
 			  break;
 			  case 'ubah_user';
                 include 'ubah_user.php';
-        break;
+			  break;
 			  case 'ubah_user02';
                 include 'ubah_user02.php';
 			  break;
-			  case 'ubah_skck';
-                include 'ubah_request_skck.php';
+			  case 'view_skck';
+                include 'view_skck.php';
 			  break;
-			  case 'ubah_ktp';
-                include 'ubah_request_ktp.php';
+			  case 'view_ktp';
+                include 'view_ktp.php';
 			  break;
-			  case 'ubah_kk';
-                include 'ubah_request_kk.php';
+			  case 'view_kk';
+                include 'view_kk.php';
 			  break;
-			  case 'ubah_skd';
-                include 'ubah_request_skd.php';
+			  case 'view_skd';
+                include 'view_skd.php';
         break;
-			  case 'ubah_akta';
-                include 'ubah_request_akta.php';
+			  case 'view_akta';
+                include 'view_akta.php';
         break;
-			  case 'ubah_pernikahan';
-                include 'ubah_request_pernikahan.php';
+			  case 'view_pernikahan';
+                include 'view_pernikahan.php';
         break;
-			  case 'ubah_kematian';
-                include 'ubah_request_kematian.php';
+			  case 'view_kematian';
+                include 'view_kematian.php';
+			  break;
+			  case 'view_cetak_skck';
+                include 'view_cetak_skck.php';
+			  break;
+			  case 'view_cetak_ktp';
+                include 'view_cetak_ktp.php';
+			  break;
+			  case 'view_cetak_kk';
+                include 'view_cetak_kk.php';
+			  break;
+			  case 'view_cetak_skd';
+                include 'view_cetak_skd.php';
         break;
+			  case 'view_cetak_akta';
+                include 'view_cetak_akta.php';
+        break;
+			  case 'view_cetak_pernikahan';
+                include 'view_cetak_pernikahan.php'; 
+        break;
+			  case 'view_cetak_kematian';
+                include 'view_cetak_kematian.php';
+			  break;
+			  case 'surat_dicetak';
+                include 'surat_dicetak.php';
+              break;
 			  case 'laporan_perbulan';
                 include 'laporan_perbulan.php';
 			  break;
 			  case 'laporan_pertahun';
                 include 'laporan_pertahun.php';
+			  break;
+			  case 'permohonan_surat';
+                include 'permohonan_surat.php';
               break;
               default:
                 echo "<center>HALAMAN KOSONG</center>";
               break;
             }
           }else{
-            include 'beranda.php';
+            include 'beranda2.php';
           }
         ?>
-
 			</div>
+
 <?php include 'footer.php'; ?>

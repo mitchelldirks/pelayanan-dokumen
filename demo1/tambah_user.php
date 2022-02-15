@@ -69,6 +69,19 @@
 														<option value="Ketua RT">Ketua RT</option>
 													</select>
 												</div>
+
+												<?php if($_SESSION['hak_akses'] == 'admin' || $_SESSION['hak_akses'] == 'rw'){ ?>
+												<div class="form-group">
+													<label>Warga</label>
+													<select name="warga" class="form-control">
+														<option disabled="" selected="">Pilih Lokasi Warga</option>
+														<option value="RT1">Warga RT 01</option>
+														<option value="RT2">Warga RT 02</option>
+													</select>
+												</div>
+												<?php }else{ ?>
+													<input type="hidden" name="warga" value="<?php echo $_SESSION['warga']; ?>">
+												<?php } ?>
 												
 											</div>
 									</div>
@@ -96,8 +109,9 @@ if(isset($_POST['simpan'])){
 	$tanggal_lahir = $_POST['tanggal_lahir'];
 	$status_warga = $_POST['status_warga'];
 	$alamat = $_POST['alamat'];
+	$warga = $_POST['warga'];
 
-	$sql = "INSERT INTO data_user (username, nik,password,hak_akses, nama,jekel,tempat_lahir,tanggal_lahir,status_warga,alamat) VALUES ('$username','$nik','$password','$hak_akses','$nama','$jekel','$tempat_lahir','$tanggal_lahir','$status_warga','$alamat')";
+	$sql = "INSERT INTO data_user (username, nik,password,hak_akses, nama,jekel,tempat_lahir,tanggal_lahir,status_warga,alamat,warga) VALUES ('$username','$nik','$password','$hak_akses','$nama','$jekel','$tempat_lahir','$tanggal_lahir','$status_warga','$alamat','$warga')";
 	$query = mysqli_query($konek,$sql);
 
 	if($query){

@@ -53,7 +53,7 @@
                         <li class="scroll active"><a href="#home">Beranda</a></li>
                         <li class="scroll"><a href="#features">Jadwal</a></li>
                         <li class="scroll"><a href="#services">Informasi</a></li>
-                        <li class="scroll"><a href="pegawai.php">Pegawai</a></li>
+                        <li class="scroll"><a href="login.php">Login</a></li>
                         
                     </ul>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="col-lg-12 text-center">
                         <div class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
                            <!-- Button trigger modal -->
-                           <a href="login.php" type="submit" class="btn btn-primary">Login</a>
+                           <a href="login.php" class="btn btn-primary">Login</a>
                           
                         </div>
                     </div>

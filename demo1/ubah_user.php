@@ -131,7 +131,7 @@ if(isset($_POST['ubah'])){
 <?php
 	if(isset($_GET['username'])){
 		$username = $_GET['username'];
-		$tampil_username = "SELECT * FROM data_user WHERE username=$username";
+		$tampil_username = "SELECT * FROM data_user WHERE username = '".$_GET['username']."'";
 		$query = mysqli_query($konek,$tampil_username);
 		$data = mysqli_fetch_array($query,MYSQLI_BOTH);
 		$username = $data['username'];
@@ -220,8 +220,20 @@ if(isset($_POST['ubah'])){
 														<option value="Ketua RT" <?php if($hak_akses=="Ketua RT") echo 'selected'?>>Ketua RT</option>
 													</select>
 												</div>
-												
+
+												<?php if($_SESSION['hak_akses'] == 'admin' || $_SESSION['hak_akses'] == 'rw'){ ?>
+												<div class="form-group">
+													<label>Warga</label>
+													<select name="warga" class="form-control">
+														<option disabled="" selected="">Pilih Lokasi Warga</option>
+														<option value="RT1">Warga RT 01</option>
+														<option value="RT2">Warga RT 02</option>
 													</select>
+												</div>
+												<?php }else{ ?>
+													<input type="hidden" name="warga" value="<?php echo $_SESSION['warga']; ?>">
+												<?php } ?>
+												
 												</div>
 											</div>
 									</div>

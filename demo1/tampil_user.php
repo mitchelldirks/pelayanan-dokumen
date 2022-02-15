@@ -8,7 +8,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                        <h4 class="card-title">Data User RT 01</h4>
+                        <?php if($_SESSION['hak_akses'] == 'admin' || $_SESSION['hak_akses'] == 'rw'){ ?>
+                            <h4 class="card-title">Data User RT</h4>
+                        <?php }else{ ?>
+                            <h4 class="card-title">Data User <?php echo $_SESSION['warga']; ?></h4>
+                        <?php } ?>
                             <a href="?halaman=tambah_user" class="btn btn-primary btn-round ml-auto">
                                 <i class="fa fa-plus"></i>
                                     Add User
@@ -72,63 +76,49 @@
                                                             <th>No.</th>
                                                             <th>username</th>
                                                             <th>NIK</th>
-                                                            <th>Password</th>
                                                             <th>Nama</th>
                                                             <th>Tempat Tanggal Lahir</th>
                                                             <th>Alamat</th>
                                                             <th>Jenis Kelamin</th>
                                                             <th>Status Warga</th>
+                                                            <th>Warga</th>
                                                             <th>Hak Akses</th>
-                                                            
                                                             <th style="width: 10%">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                            $no=1;
-                                                            $tampil = "SELECT * FROM data_user";
-                                                            $query = mysqli_query($konek,$tampil);
-                                                            while($data=mysqli_fetch_array($query,MYSQLI_BOTH)){
-                                                            $username = $data['username'];
-                                                            $nik = $data['nik'];
-                                                            $password = $data['password'];
-                                                            $nama = $data['nama'];
-                                                                
-                                                            $tempat = $data['tempat_lahir'];
-                                                            $tanggal = $data['tanggal_lahir'];
-                                                            $alamat = $data['alamat'];
-                                                            $jekel = $data['jekel'];
-                                                            $status_warga = $data['status_warga'];
-                                                            $tanggal_lahir = date("d-F-Y", strtotime($tanggal));
-                                                            $hak_akses = $data['hak_akses'];
-                                                               
+                                                            $no = 1;
+                                                            if($_SESSION['hak_akses'] == 'admin' || $_SESSION['hak_akses'] == 'rw'){
+                                                                $query = mysqli_query($konek, "SELECT * FROM data_user");
+                                                            }else{
+                                                                $query = mysqli_query($konek, "SELECT * FROM data_user WHERE warga = '".$_SESSION['warga']."'");
+                                                            }
+                                                            while($data = mysqli_fetch_array($query)){
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no++;?></td>
-                                                            <td><?php echo $username;?></td>
-                                                            <td><?php echo $nik;?></td>
-                                                            <td><?php echo $password;?></td>
-                                                            <td><?php echo $nama;?></td>
-                                                            <td><?php echo $tempat.", ".$tanggal_lahir;?></td>
-                                                            <td><?php echo $alamat;?></td>
-                                                            <td><?php echo $jekel;?></td>
-                                                            <td><?php echo $status_warga;?></td>
-                                                            <td><?php echo $hak_akses;?></td>
-                                                            
+                                                            <td><?php echo $data['username'];?></td>
+                                                            <td><?php echo $data['nik'];?></td>
+                                                            <td><?php echo $data['nama'];?></td>
+                                                            <td><?php echo $data['tempat_lahir'].", ".date('d/m/Y', strtotime($data['tanggal_lahir']));?></td>
+                                                            <td><?php echo $data['alamat'];?></td>
+                                                            <td><?php echo $data['jekel'];?></td>
+                                                            <td><?php echo $data['status_warga'];?></td>
+                                                            <td><?php echo $data['warga'];?></td>
+                                                            <td><?php echo $data['hak_akses'];?></td>
                                                             <td>
-                                                            <div class="form-button-action">
-                                                            <a href="?halaman=ubah_user&username=<?php echo $username;?>" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit User">
-                                                            <i class="fa fa-edit"></i></a>
-
-                                                            <a href="?halaman=tampil_user&username=<?php echo $username;?>" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus User">
-                                                            <i class="fa fa-times"></i>
+                                                                <div class="form-button-action">
+                                                                    <a href="?halaman=ubah_user&username=<?php echo $data['username'];?>" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit User">
+                                                                        <i class="fa fa-edit"></i>
+                                                                    </a>
+                                                                    <a href="?halaman=tampil_user&username=<?php echo $data['username'];?>" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus User">
+                                                                        <i class="fa fa-times"></i>
                                                                     </a>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <?php
-                                                            }   
-                                                        ?>
+                                                        <?php } ?>
                                                     </tbody>
                                                 </table>
                                             </div>

@@ -178,7 +178,7 @@
 													<tr>
 														<td><?php echo $format;?></td>
 														<td><?php echo $username;?></td>
-														<td><?php echo $nik:?></td>
+														<td><?php echo $nik;?></td>
 														<td><?php echo $nama;?></td>
 														
 														<td><img src="../dataFoto/scan_ktp/<?php echo $ktp;?>" width="50" height="50" alt=""></td>

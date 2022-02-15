@@ -6,7 +6,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Halaman Login Warga</title>
+  <title>Halaman Login</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="main/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="main/vendors/base/vendor.bundle.base.css">
@@ -32,33 +32,12 @@
               <div class="brand-logo">
                 <img src="main/img/GBJ2.png" width="150" height="54" alt="logo">
               </div>
-              <h4>LOGIN WARGA</h4>
+              <h4>LOGIN</h4>
                <h6 class="font-weight-light"></h6>
-              <form method="POST" class="pt-3">
-                <div class="form-group">
-                  <label>Pilih User</label>
-                  <select name="hak_akses" id="" class="form-control text-uppercase">
-                    <option value="" selected="selected">Login sebagai</option>
-                    <?php
-                        $SQL = "SELECT * FROM data_user WHERE hak_akses='Warga RT01' or hak_akses='Warga RT02'"; 
-                        $QUERY = mysqli_query($konek,$SQL);
-                        while($data=mysqli_fetch_array($QUERY,MYSQLI_BOTH)){
-                          $hak_akses = $data['hak_akses'];
-                    ?>
-                    <option value="<?php echo $hak_akses;?>">
-                      <?php echo $hak_akses;?>
-                    
-                    
-                    </option>
-                    <?php 
-                        }
-                    ?>
-                  </select>
-                  <!-- <input type="text" name="nik" class="form-control form-control-xs text-uppercase" placeholder="Password" required autofocus> -->
-                </div>
+                <form method="POST" class="pt-3">
                 
-                 <div class="form-group">
-               <label>Username</label>
+                <div class="form-group">
+                  <label>Username</label>
                   <input type="text" name="username" class="form-control form-control-xs text-bold" placeholder="Username Anda.." oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "16" required autofocus autocomplete=’off’>
                 </div>
 
@@ -95,13 +74,11 @@
   <!-- login -->
   <?php
     if(isset($_POST['login'])){
-      // $nik = $_POST['nik'];
-      $password = $_POST['password'];
-       $username = $_POST['username'];
-      $hak_akses = $_POST['hak_akses'];
+        // $nik = $_POST['nik'];
+        $password = $_POST['password'];
+        $username = $_POST['username'];
       
-        $sql_login = "SELECT * FROM data_user WHERE hak_akses='$hak_akses' AND username = '$username' AND 
-        password='$password'";
+        $sql_login = "SELECT * FROM data_user WHERE username = '$username' AND password='$password'";
         $query_login = mysqli_query($konek,$sql_login);
         $data_login = mysqli_fetch_array($query_login,MYSQLI_BOTH);
         $jumlah_login = mysqli_num_rows($query_login);
@@ -112,8 +89,8 @@
           $_SESSION['password']=$data_login['password'];
           $_SESSION['hak_akses']=$data_login['hak_akses'];
           $_SESSION['username']=$data_login['username'];
+          $_SESSION['warga']=$data_login['warga'];
          
-
           echo "<script language='javascript'>swal('Selamat...', 'Login Berhasil!', 'success');</script>" ;
           echo '<meta http-equiv="refresh" content="3; url=demo1/main.php">';
         }else{
