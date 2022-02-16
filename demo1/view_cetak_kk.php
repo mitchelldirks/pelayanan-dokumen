@@ -224,6 +224,11 @@
             <td><?php echo $alamat;?></td>
         </tr>
         <tr>
+                                            <td>Domisili</td>
+                                            <td>:</td>
+                                            <td><?php echo @mysqli_fetch_array(mysqli_query($konek,"SELECT * from data_user where username = '".$data['username']."' "))['warga'];?></td>
+                                        </tr>
+        <tr>
             <td>Status Warga</td>
             <td>:</td>
             <td><?php echo $status_warga;?></td>

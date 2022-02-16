@@ -5,12 +5,12 @@
 session_start();
 $updated_data = array();
 if ($_SESSION['hak_akses']=='rt') {
-	$updated_data['approve_rt'] = $_GET['status'] == 'approve' ? 1 : 0;
-	$updated_data['approve_rt_date'] = date("Y-m-d H:i:s");
+	$updated_data['approve_rt'] 		= $_GET['status'] == 'approve' ? 1 : 0;
+	$updated_data['approve_rt_date'] 	= date("Y-m-d H:i:s");
 }elseif ($_SESSION['hak_akses']=='rw') {
-	$updated_data['approve_rw'] = $_GET['status'] == 'approve' ? 1 : 0;
-	$updated_data['approve_rw_date'] = date("Y-m-d H:i:s");
-	$updated_data['status'] = 'selesai';
+	$updated_data['approve_rw'] 		= $_GET['status'] == 'approve' ? 1 : 0;
+	$updated_data['approve_rw_date'] 	= date("Y-m-d H:i:s");
+	$updated_data['status'] 			= 'selesai';
 
 }else{
 	echo "<script language='javascript'>swal('Gagal...', 'Anda tidak memiliki akses', 'error');</script>" ;

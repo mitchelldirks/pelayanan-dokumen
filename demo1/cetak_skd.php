@@ -164,6 +164,11 @@
             <td><?php echo $alamat;?></td>
         </tr>
         <tr>
+                                            <td>Domisili</td>
+                                            <td>:</td>
+                                            <td><?php echo @mysqli_fetch_array(mysqli_query($konek,"SELECT * from data_user where username = '".$data['username']."' "))['warga'];?></td>
+                                        </tr>
+        <tr>
             <td>Keperluan</td>
             <td>:</td>
             <td><?php echo $keperluan;?></td>
