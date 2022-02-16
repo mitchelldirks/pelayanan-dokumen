@@ -20,8 +20,6 @@
 											<thead>
 												<tr>
                                                     <th>Tanggal & Waktu Request</th>
-                                                    <th>Username</th>
-                                                    <th>NIK</th>
                                                     <th>Nama Lengkap</th>
 													<th>Scan KTP</th>
 													<th>Scan KK</th>
@@ -45,7 +43,6 @@
 														$tgl = $data['tanggal_request'];
 														$format = date('d F Y h:i:s', strtotime($tgl));	
 														$username = $data['username'];
-                                                        $nik = $data['nik'];
                                                         $nama = $data['nama'];
 														$status = $data['status'];
 														$ktp = $data['scan_ktp'];
@@ -65,7 +62,6 @@
                                                 ?>
 												<tr>
 													<td><?php echo $format;?></td>
-                                                    <td><?php echo $nik;?></td>
                                                     <td><?php echo $nama;?></td>
                                                     
 													<td><img src="../dataFoto/scan_ktp/<?php echo $ktp;?>" width="50" height="50" alt=""></td>
@@ -131,8 +127,6 @@
 												<tr>
                                                     <th>Tanggal & Waktu Request</th>
                                                    
-                                                    <th>Username</th>
-                                                    <th>NIK</th>
                                                     <th>Nama Lengkap</th>
 													<th>Scan KTP</th>
 													<th>Scan KK</th>
@@ -144,13 +138,12 @@
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_ktp natural join data_user WHERE status=2";
+                                                    $sql = "SELECT * FROM data_request_ktp  WHERE status='selesai'";
                                                     $query = mysqli_query($konek,$sql);
                                                     while($data=mysqli_fetch_array($query,MYSQLI_BOTH)){
 														$tgl = $data['tanggal_request'];
 														$format = date('d F Y h:i:s', strtotime($tgl));
 														$username =$data['username'];
-                                                        $nik = $data['nik'];
                                                         $nama = $data['nama'];
 														$status = $data['status'];
 														$ktp = $data['scan_ktp'];
@@ -168,8 +161,6 @@
                                                 ?>
 												<tr>
 													<td><?php echo $format;?></td>
-													<td><?php echo $username;?></td>
-                                                    <td><?php echo $nik;?></td>
                                                     <td><?php echo $nama;?></td>
 													<td><img src="../dataFoto/scan_ktp/<?php echo $ktp;?>" width="50" height="50" alt=""></td>
 													<td><img src="../dataFoto/scan_kk/<?php echo $kk;?>" width="50" height="50" alt=""></td>
@@ -211,8 +202,6 @@
 											<thead>
 												<tr>
                                                     <th>Tanggal & Waktu Request</th>
-                                                    <th>Username</th>
-                                                    <th>NIK</th>
                                                     <th>Nama </th>
 													
 													<th>Scan Surat Nikah</th>
@@ -225,7 +214,7 @@
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_kk  natural join data_user WHERE status=1";
+                                                    $sql = "SELECT * FROM data_request_kk";
                                                     
 
                                                     $query = mysqli_query($konek,$sql);
@@ -253,8 +242,6 @@
                                                 ?>
 												<tr>
 													<td><?php echo $format;?></td>
-													<td><?php echo $username;?></td>
-                                                    <td><?php echo $nik;?></td>
                                                     <td><?php echo $nama;?></td>
                                                     
 													
@@ -300,8 +287,6 @@
 											<thead>
 												<tr>
                                                     <th>Tanggal Request</th>
-                                                    <th>Username</th>
-                                                    <th>NIK</th>
                                                     <th>Nama </th>
 													<th>Scan KTP</th>
 													<th>Scan KK</th>
@@ -315,13 +300,11 @@
 											<tbody>
 											
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_skck natural join data_user where status=2";
+                                                    $sql = "SELECT * FROM data_request_skck  where status='selesai'";
                                                     $query = mysqli_query($konek,$sql);
                                                     while($data=mysqli_fetch_array($query,MYSQLI_BOTH)){
 														$tgl = $data['tanggal_request'];
 														$format = date('d F Y h:i:s', strtotime($tgl));
-														$username=$data['username'];
-                                                        $nik = $data['nik'];
                                                         $nama = $data['nama'];
 														$status = $data['status'];
 														$ktp = $data['scan_ktp'];
@@ -341,8 +324,6 @@
                                                 ?>
 												<tr>
 													<td><?php echo $format;?></td>
-													<td><?php echo $username;?></td>
-                                                    <td><?php echo $nik;?></td>
                                                     <td><?php echo $nama;?></td>
 													<td><img src="../dataFoto/scan_ktp/<?php echo $ktp;?>" width="50" height="50" alt=""></td>
 													<td><img src="../dataFoto/scan_kk/<?php echo $kk;?>" width="50" height="50" alt=""></td>
@@ -403,8 +384,6 @@
 											<thead>
 												<tr>
                                                     <th>Tanggal & Waktu Request</th>
-                                                    <th>Username</th>
-                                                    <th>NIK</th>
                                                     <th>Nama </th>
 													<th>Scan KTP Ayah</th>
 													<th>Scan KTP Ibu</th>
@@ -418,7 +397,7 @@
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_akta  natural join data_user WHERE status=1";
+                                                    $sql = "SELECT * FROM data_request_akta";
                                                     
 
                                                     $query = mysqli_query($konek,$sql);
@@ -427,7 +406,6 @@
 														$tgl = $data['tanggal_request'];
 														$format = date('d F Y h:i:s', strtotime($tgl));	
 														$username=$data['username'];
-                                                        $nik = $data['nik'];
                                                         $nama = $data['nama'];
 														$status = $data['status'];
 														$ktp1 = $data['scan_ktp_ayah'];
@@ -448,8 +426,6 @@
                                                 ?>
 												<tr>
 													<td><?php echo $format;?></td>
-													<td><?php echo $username;?></td>
-                                                    <td><?php echo $nik;?></td>
                                                     <td><?php echo $nama;?></td>
                                                     <td><img src="../dataFoto/scan_ktp/<?php echo $ktp1;?>" width="50" height="50" alt=""></td>
 													<td><img src="../dataFoto/scan_ktp/<?php echo $ktp2;?>" width="50" height="50" alt=""></td>
@@ -513,8 +489,6 @@
 											<thead>
 												<tr>
                                                     <th>Tanggal & Waktu Request</th>
-                                                    <th>Username</th>
-                                                    <th>NIK</th>
                                                     <th>Nama </th>
 													<th>Scan KTP Ayah</th>
 													<th>Scan KTP Ibu</th>
@@ -528,7 +502,7 @@
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_pernikahan  natural join data_user WHERE status=1";
+                                                    $sql = "SELECT * FROM data_request_pernikahan ";
                                                     
 
                                                     $query = mysqli_query($konek,$sql);
@@ -537,8 +511,6 @@
 														$tgl = $data['tanggal_request'];
 														$format = date('d F Y h:i:s', strtotime($tgl));	
 														$username=$data['username'];
-                                                        $nik = $data['nik'];
-                                                        $nama = $data['nama'];
 														$status = $data['status'];
 														$ktp1 = $data['scan_ktp_ayah'];
 														$ktp2 = $data['scan_ktp_ibu'];
@@ -623,8 +595,6 @@
 											<thead>
 												<tr>
                                                     <th>Tanggal & Waktu Request</th>
-                                                    <th>Username</th>
-                                                    <th>NIK</th>
                                                     <th>Nama </th>
 													<th>Scan KTP Ayah</th>
 													<th>Scan KTP Ibu</th>
@@ -638,7 +608,7 @@
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_kematian  natural join data_user WHERE status=1";
+                                                    $sql = "SELECT * FROM data_request_kematian";
                                                     
 
                                                     $query = mysqli_query($konek,$sql);
@@ -647,7 +617,6 @@
 														$tgl = $data['tanggal_request'];
 														$format = date('d F Y h:i:s', strtotime($tgl));	
 														$username=$data['username'];
-                                                        $nik = $data['nik'];
                                                         $nama = $data['nama'];
 														$status = $data['status'];
 														$ktp1 = $data['scan_ktp_ayah'];
@@ -668,8 +637,6 @@
                                                 ?>
 												<tr>
 													<td><?php echo $format;?></td>
-													<td><?php echo $username;?></td>
-                                                    <td><?php echo $nik;?></td>
                                                     <td><?php echo $nama;?></td>
                                                     <td><img src="../dataFoto/scan_ktp/<?php echo $ktp1;?>" width="50" height="50" alt=""></td>
 													<td><img src="../dataFoto/scan_ktp/<?php echo $ktp2;?>" width="50" height="50" alt=""></td>
