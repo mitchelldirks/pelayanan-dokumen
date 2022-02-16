@@ -1,7 +1,6 @@
 <?php include '../konek.php';?>
 <?php
-	$tampil_username = "SELECT * FROM data_user WHERE username=$_SESSION[username]";
-	$query = mysqli_query($konek,$tampil_username);
+	$query = mysqli_query($konek, "SELECT * FROM data_user WHERE username = '".$_SESSION['username']."'");
 	$data = mysqli_fetch_array($query,MYSQLI_BOTH);
     $username = $data['username'];
 	$nik = $data['nik'];

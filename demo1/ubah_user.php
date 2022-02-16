@@ -212,12 +212,10 @@ if(isset($_POST['ubah'])){
 													<label>Hak Akses</label>
 													<select name="hak_akses" class="form-control">
 														<option disbaled="" selected="">Pilih Hak Akses</option>
-														<option value="Warga RT01" <?php if($hak_akses=="Warga RT01") echo 'selected'?>>Warga RT01</option>
-
-														<option value="Warga RT02" <?php if($hak_akses=="Warga RT02") echo 'selected'?>>Warga RT02</option>
-														
-														<option value="Ketua RW" <?php if($hak_akses=="Ketua RW") echo 'selected'?>>Ketua RW</option>
-														<option value="Ketua RT" <?php if($hak_akses=="Ketua RT") echo 'selected'?>>Ketua RT</option>
+														<option value="warga" <?php if($hak_akses=="warga") echo 'selected'?>>Warga</option>
+														<option value="admin" <?php if($hak_akses=="admin") echo 'selected'?>>Admin</option>
+														<option value="rw" <?php if($hak_akses=="rw") echo 'selected'?>>Ketua RW</option>
+														<option value="rt" <?php if($hak_akses=="rt") echo 'selected'?>>Ketua RT</option>
 													</select>
 												</div>
 

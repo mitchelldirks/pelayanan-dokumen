@@ -3,7 +3,7 @@
 <script src="js/jquery-2.1.3.min.js"></script>
 <script src="js/sweetalert.min.js"></script> 
 <?php
-	$tampil_username = "SELECT * FROM data_user WHERE username=$_SESSION[username]";
+	$tampil_username = "SELECT * FROM data_user WHERE username = '".$_SESSION['username']."'";
 	$query = mysqli_query($konek,$tampil_username);
 	$data = mysqli_fetch_array($query,MYSQLI_BOTH);
 	$username = $data['username'];
@@ -12,7 +12,7 @@
 <div class="page-inner">
 					<div class="row">
 						<div class="col-md-12">	
-						<form method="POST" enctype="multipart/form-data">
+						<form action="post_request.php?module=request_kk&act=tambah" method="POST" enctype="multipart/form-data">
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">FORM TAMBAH REQUEST SURAT PENGANTAR KK</div> 
@@ -25,7 +25,7 @@
 													<input type="text" class="form-control" value="<?= $username.' - '.$nama;?>" readonly>
 												</div>
 												<div class="form-group">
-													<input type="hidden" name="username" class="form-control" value="<?= $tampil_username;?>" readonly>
+													<input type="hidden" name="username" class="form-control" value="<?= $username;?>" readonly>
 												</div>
 
 												<div class="form-group">
@@ -46,7 +46,7 @@
 									</div>
 								</div>
 								<div class="card-action">
-									<button name="kirim" class="btn btn-success">Kirim</button>
+									<button name="kirim" type="submit" class="btn btn-success">Kirim</button>
 									<a href="?halaman=beranda" class="btn btn-default">Batal</a>
 								</div>
 							</div>
@@ -54,27 +54,3 @@
 						</form>
 					</div>
 </div>
-
-<?php
-if(isset($_POST['kirim'])){
-	$username = $_POST['username'];
-	$keperluan = $_POST['keperluan'];
-	$nama_sn= isset($_FILES['sn']);
-	$file_sn = $_POST['username']."_".".jpg";
-	$nama_akta = isset($_FILES['akta_lahir']);
-    $file_akta = $_POST['username']."_".".jpg";
-	$sql = "INSERT INTO data_request_kk(username,scan_suratnikah,akta_lahir,keperluan) VALUES ('$username','$file_sn','$file_akta','$keperluan')";
-	$query = mysqli_query($konek,$sql) or die (mysqli_error());
-
-	if($query){
-		copy($_FILES['sn']['tmp_name'],"../dataFoto/scan_suratnikah/".$file_sn);
-		copy($_FILES['akta_lahir']['tmp_name'],"../dataFoto/akta_lahir/".$file_akta);
-		echo "<script language='javascript'>swal('Selamat...', 'Kirim Berhasil', 'success');</script>" ;
-		echo '<meta http-equiv="refresh" content="3; url=?halaman=tampil_status">';
-	  }else{
-		echo "<script language='javascript'>swal('Gagal...', 'Kirim Gagal', 'error');</script>" ;
-		echo '<meta http-equiv="refresh" content="3; url=?halaman=request_kk">';
-	  }
-}
-	
-?>
