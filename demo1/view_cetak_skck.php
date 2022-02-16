@@ -162,6 +162,19 @@
                                                     <font size="4"><b>SURAT KETERANGAN SKCK</b></font><br>
                                                     <hr style="margin:0px" color="black">
                                                     <span>Nomor : 043.3 / <?php echo $id;?> / <?php echo $tgl2 ;?></span>
+                                    <span>
+                                        <div id="qrcode"></div>
+                                        <script type="text/javascript">
+                                        var qrcode = new QRCode("qrcode", {
+                                            text: "pelayanan-dokumen/demo1/main.php?halaman=view_cetak_skck&id_request_skck=<?php echo $id ?>",
+                                            width: 100,
+                                            height: 100,
+                                            colorDark : "#000000",
+                                            colorLight : "#ffffff",
+                                            correctLevel : QRCode.CorrectLevel.H
+                                        });
+                                        </script>
+                                    </span>
                                                 </center>
                                             </td>
                                         </tr>

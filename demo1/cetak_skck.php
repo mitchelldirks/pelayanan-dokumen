@@ -97,6 +97,22 @@
                     <font size="4"><b>SURAT KETERANGAN / PENGANTAR</b></font><br>
                     <hr style="margin:0px" color="black">
                     <span>Nomor : 045.2 / <?php echo $id;?> / 29.07.05 </span>
+                    <br>
+                    <span>
+        <script src="../assets/js/qr/jquery.min.js"></script>
+    <script src="../assets/js/qr/qrcode.js"></script>
+                                        <div id="qrcode"></div>
+                                        <script type="text/javascript">
+                                        var qrcode = new QRCode("qrcode", {
+                                            text: "pelayanan-dokumen/demo1/main.php?halaman=view_cetak_skck&id_request_skck=<?php echo $id ?>",
+                                            width: 100,
+                                            height: 100,
+                                            colorDark : "#000000",
+                                            colorLight : "#ffffff",
+                                            correctLevel : QRCode.CorrectLevel.H
+                                        });
+                                        </script>
+                                    </span>
                 </center>
             </td>
         </tr>

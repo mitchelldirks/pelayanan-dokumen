@@ -27,7 +27,7 @@
         $keterangan = $data['keterangan'];
         $keperluan = $data['keperluan'];
         $status = $data['status'];
-        $acc = $data['acc'];
+        $acc = $data['approve_rt_date'];
         $format4 = date('d F Y', strtotime($acc));
         if($format4==0){
             $format4="kosong";
@@ -155,6 +155,7 @@
                                         </tr>
                                     </table>
                                     <br>
+
                                     <table border="0" align="center">
                                         <tr>
                                             <td>
@@ -162,6 +163,19 @@
                                                     <font size="4"><b>SURAT KETERANGAN DOMISILI</b></font><br>
                                                     <hr style="margin:0px" color="black">
                                                     <span>Nomor :041.1 / <?php echo $id;?> / <?php echo $tgl2 ;?></span>
+                                    <span>
+                                        <div id="qrcode"></div>
+                                        <script type="text/javascript">
+                                        var qrcode = new QRCode("qrcode", {
+                                            text: "pelayanan-dokumen/demo1/main.php?halaman=view_cetak_skd&id_request_skd=<?php echo $id ?>",
+                                            width: 100,
+                                            height: 100,
+                                            colorDark : "#000000",
+                                            colorLight : "#ffffff",
+                                            correctLevel : QRCode.CorrectLevel.H
+                                        });
+                                        </script>
+                                    </span>
                                                 </center>
                                             </td>
                                         </tr>
@@ -242,7 +256,7 @@
                                         <tr>
                                             <th></th>
                                             <th width="100px"></th>
-                                            <th>Bogor, <?php echo $acc;?></th>
+                                            <th>Bogor, <?php echo $format4;?></th>
                                         </tr>
                                         <tr>
                                             <td>Ketua RT 01</td>

@@ -25,9 +25,8 @@
 		$status_warga = $data['status_warga'];
         $request = $data['request'];
         $keperluan = $data['keperluan'];
-        $acc = $data['acc'];
         $format4 = date('d F Y', strtotime($acc));
-        if($acc==0){
+        if($data['status']=='selesai'){
             $acc="BELUM TTD";
         }elseif($acc==1){
            $acc;

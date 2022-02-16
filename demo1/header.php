@@ -26,6 +26,9 @@
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="../assets/css/demo.css">
+	<script src="../assets/js/qr/jquery.min.js"></script>
+	<script src="../assets/js/qr/qrcode.js"></script>
+
 </head>
 <body>
 	<div class="wrapper">

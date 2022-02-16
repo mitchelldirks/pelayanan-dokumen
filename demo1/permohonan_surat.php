@@ -36,7 +36,7 @@
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_skd  natural join data_user WHERE status=1";
+                                                    $sql = "SELECT * FROM data_request_skd  ";
                                                     
 
                                                     $query = mysqli_query($konek,$sql);

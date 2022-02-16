@@ -96,6 +96,22 @@
                     <font size="4"><b>SURAT PENGANTAR PERNIKAHAN</b></font><br>
                     <hr style="margin:0px" color="black">
                     <span>Nomor : 046.6 / <?php echo $id;?> / <?php echo $tgl2;?> </span>
+                    <br>
+                    <span>
+        <script src="../assets/js/qr/jquery.min.js"></script>
+    <script src="../assets/js/qr/qrcode.js"></script>
+                                        <div id="qrcode"></div>
+                                        <script type="text/javascript">
+                                        var qrcode = new QRCode("qrcode", {
+                                            text: "pelayanan-dokumen/demo1/main.php?halaman=view_cetak_pernikahan&id_request_pernikahan=<?php echo $id ?>",
+                                            width: 100,
+                                            height: 100,
+                                            colorDark : "#000000",
+                                            colorLight : "#ffffff",
+                                            correctLevel : QRCode.CorrectLevel.H
+                                        });
+                                        </script>
+                                    </span>
                 </center>
             </td>
         </tr>
