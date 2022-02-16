@@ -62,11 +62,10 @@
 													<label>Hak Akses</label>
 													<select name="hak_akses" class="form-control">
 														<option disabled="" selected="">Pilih Hak Akses</option>
-														<option value="Warga RT01">Warga RT 01</option>
-														<option value="Warga RT02">Warga RT 02</option>
-														<option value="Admin">Admin</option>
-														<option value="Ketua RW">Ketua RW</option>
-														<option value="Ketua RT">Ketua RT</option>
+														<option value="warga">Warga</option>
+														<option value="admin">Admin</option>
+														<option value="rw">Ketua RW</option>
+														<option value="rt">Ketua RT</option>
 													</select>
 												</div>
 

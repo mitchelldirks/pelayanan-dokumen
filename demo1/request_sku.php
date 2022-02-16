@@ -3,7 +3,7 @@
 <script src="js/jquery-2.1.3.min.js"></script>
 <script src="js/sweetalert.min.js"></script> 
 <?php
-	$tampil_username = "SELECT * FROM data_user WHERE username=$_SESSION[username]";
+	$tampil_username = "SELECT * FROM data_user WHERE username = '".$_SESSION['username']."'";
 	$query = mysqli_query($konek,$tampil_username);
 	$data = mysqli_fetch_array($query,MYSQLI_BOTH);
 	$username = $data['username'];
@@ -12,7 +12,7 @@
 <div class="page-inner">
 					<div class="row">
 						<div class="col-md-12">	
-						<form method="POST" enctype="multipart/form-data">
+						<form action="post_request.php?module=request_sku&act=tambah" method="POST" enctype="multipart/form-data">
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">FORM TAMBAH REQUEST SURAT PENGANTAR </div>
@@ -63,7 +63,7 @@
 									</div>
 								</div>
 								<div class="card-action">
-									<button name="kirim" class="btn btn-success">Kirim</button>
+									<button name="kirim" type="submit" class="btn btn-success">Kirim</button>
 									<a href="?halaman=beranda" class="btn btn-default">Batal</a>
 								</div>
 							</div>
@@ -71,41 +71,3 @@
 						</form>
 					</div>
 </div>
-<?php
-if(isset($_POST['kirim'])){
-	$username = $_POST['username'];
-	
-	$keperluan = $_POST['keperluan'];
-		$nama_ktp = isset($_FILES['ktp']);
-		$file_ktp = $_POST['username']."_".".jpg";
-		$nama_kk = isset($_FILES['kk']);
-    	$file_kk = $_POST['username']."_".".jpg";
-       
-        $nama_akta = isset($_FILES['akta']);
-        $file_akta = $_POST['username']."_".".jpg";
-        $nama_ijazah = isset($_FILES['ijazah']);
-        $file_ijazah = $_POST['username']."_".".jpg";
-        $nama_surathilang = isset($_FILES['surathilang']);
-        $file_surathilang = $_POST['username']."_".".jpg";
-
-	$sql = "INSERT INTO data_request_ktp (username,scan_ktp,scan_kk,akta_lahir,ijazah,surathilang,     keperluan) VALUES ('$username','$file_ktp','$file_kk','$file_akta','$file_ijazah','$file_surathilang' ,'$keperluan')";
-	$query = mysqli_query($konek,$sql) or die (mysqli_error());
-
-	if($query){
-		copy($_FILES['ktp']['tmp_name'],"../dataFoto/scan_ktp/".$file_ktp);
-		copy($_FILES['kk']['tmp_name'],"../dataFoto/scan_kk/".$file_kk);
-        
-        copy($_FILES['akta']['tmp_name'],"../dataFoto/akta_lahir/".$file_akta);
-        copy($_FILES['ijazah']['tmp_name'],"../dataFoto/ijazah/".$file_ijazah);
-        copy($_FILES['surathilang']['tmp_name'],"../dataFoto/surathilang/".$file_surathilang);
-
-
-		echo "<script language='javascript'>swal('Selamat...', 'Kirim Berhasil', 'success');</script>" ;
-		echo '<meta http-equiv="refresh" content="3; url=?halaman=tampil_status">';
-	  }else{
-		echo "<script language='javascript'>swal('Gagal...', 'Kirim Gagal', 'error');</script>" ;
-		echo '<meta http-equiv="refresh" content="3; url=?halaman=request_sku">';
-	  }
-}
-	
-?>

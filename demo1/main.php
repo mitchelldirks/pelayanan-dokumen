@@ -133,11 +133,6 @@
 											<span class="sub-item">SKD</span>
 										</a>
 									</li>
-									<li>
-										<a href="?halaman=request_sku">
-											<span class="sub-item">SKU</span>
-										</a>
-									</li>
 								</ul>
 							</div>
 						</li>
@@ -187,9 +182,11 @@
         break;
 			  case 'request_kematian';
                 include 'request_kematian.php';
-
-
 			  break;
+			  case 'request_sku';
+                include 'request_sku.php';
+			  break;
+
 			  case 'tampil_status';
                 include 'status_request.php';
 			  break;

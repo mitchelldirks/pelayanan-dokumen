@@ -30,14 +30,13 @@
 													<th>Pas Foto</th>
 													<th>Keperluan</th>
 													<th>Status</th>
-													
 													<th>Keterangan</th>
 													<th style="width: 10%">Action</th>
 												</tr>
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_skd natural join data_user WHERE username=$_SESSION[username]";
+                                                    $sql = "SELECT * FROM data_request_skd natural join data_user WHERE username = '".$_SESSION['username']."'";
                                                     $query = mysqli_query($konek,$sql);
                                                     while($data=mysqli_fetch_array($query,MYSQLI_BOTH)){
 														$tgl = $data['tanggal_request'];
@@ -146,7 +145,7 @@
 												</thead>
 												<tbody>
 													<?php
-														$sql = "SELECT * FROM data_request_ktp natural join data_user WHERE username=$_SESSION[username]";
+														$sql = "SELECT * FROM data_request_ktp natural join data_user WHERE username = '".$_SESSION['username']."'";
 														$query = mysqli_query($konek,$sql);
 														while($data=mysqli_fetch_array($query,MYSQLI_BOTH)){
 															$tgl = $data['tanggal_request'];
@@ -254,7 +253,7 @@
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_skck natural join data_user WHERE username=$_SESSION[username]";
+                                                    $sql = "SELECT * FROM data_request_skck natural join data_user WHERE username = '".$_SESSION['username']."'";
                                                     $query = mysqli_query($konek,$sql);
                                                     while($data=mysqli_fetch_array($query,MYSQLI_BOTH)){
 														$tgl = $data['tanggal_request'];
@@ -350,7 +349,7 @@
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_kk natural join data_user WHERE username=$_SESSION[username]";
+                                                    $sql = "SELECT * FROM data_request_kk natural join data_user WHERE username = '".$_SESSION['username']."'";
                                                     $query = mysqli_query($konek,$sql);
                                                     while($data=mysqli_fetch_array($query,MYSQLI_BOTH)){
 														$tgl = $data['tanggal_request'];
@@ -439,7 +438,7 @@
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_pernikahan natural join data_user WHERE username=$_SESSION[username]";
+                                                    $sql = "SELECT * FROM data_request_pernikahan natural join data_user WHERE username = '".$_SESSION['username']."'";
                                                     $query = mysqli_query($konek,$sql);
                                                     while($data=mysqli_fetch_array($query,MYSQLI_BOTH)){
 														$tgl = $data['tanggal_request'];
@@ -532,7 +531,7 @@
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_akta natural join data_user WHERE username=$_SESSION[username]";
+                                                    $sql = "SELECT * FROM data_request_akta natural join data_user WHERE username = '".$_SESSION['username']."'";
                                                     $query = mysqli_query($konek,$sql);
                                                     while($data=mysqli_fetch_array($query,MYSQLI_BOTH)){
 														$tgl = $data['tanggal_request'];
@@ -541,8 +540,8 @@
                                                         $nik = $data['nik'];
                                                         $nama = $data['nama'];
 														$status = $data['status'];
-														$ktp1 = $data['scan_ktp'];
-														$ktp2 = $data['scan_ktp'];
+														$ktp1 = $data['scan_ktp_ayah'];
+														$ktp2 = $data['scan_ktp_ibu'];
 														$sn = $data['scan_suratnikah'];
 														$kk = $data['scan_kk'];
 														$sk = $data['scan_surat_kelahiran'];
@@ -563,7 +562,6 @@
                                                 ?>
 												<tr>
 													<td><?php echo $format;?></td>
-													<td><?php echo $username;?></td>
                                                     <td><?php echo $nik;?></td>
 													<td><?php echo $nama;?></td>
 													<td><img src="../dataFoto/scan_ktp/<?php echo $ktp1;?>" width="50" height="50" alt=""></td>
@@ -590,9 +588,7 @@
 														</div>
 													</td>
                                                 </tr>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php } ?>
 											</tbody>
 										</table>
 									</div>
@@ -614,7 +610,6 @@
 											<thead>
 												<tr>
                                                     <th>Tanggal Request</th>
-                                                    <th>Username</th>
 													<th>NIK</th>
 													<th>Nama </th>
 													<th>Scan KTP</th>
@@ -629,16 +624,18 @@
 											</thead>
 											<tbody>
                                                 <?php
-                                                    $sql = "SELECT * FROM data_request_kematian natural join data_user WHERE username=$_SESSION[username]";
+                                                    $sql = "SELECT * FROM data_request_kematian inner join data_user WHERE data_user.username = '".$_SESSION['username']."'";
                                                     $query = mysqli_query($konek,$sql);
                                                     while($data=mysqli_fetch_array($query,MYSQLI_BOTH)){
 														$tgl = $data['tanggal_request'];
-														$format = date('d F Y', strtotime($tgl));
+														$format = date('d/m/Y', strtotime($tgl));
 														$username = $data['username'];
                                                         $nik = $data['nik'];
                                                         $nama = $data['nama'];
 														$status = $data['status'];
 														$ktp = $data['scan_ktp'];
+														$ktp1 = $data['scan_ktp1'];
+														$ktp2 = $data['scan_ktp2'];
 														$kk = $data['scan_kk'];
 														$keperluan = $data['keperluan'];
 														$keterangan = $data['keterangan'];
@@ -657,14 +654,13 @@
                                                 ?>
 												<tr>
 													<td><?php echo $format;?></td>
-													<td><?php echo $username;?></td>
                                                     <td><?php echo $nik;?></td>
 													<td><?php echo $nama;?></td>
 													<td><img src="../dataFoto/scan_ktp/<?php echo $ktp;?>" width="50" height="50" alt=""></td>
 													<td><img src="../dataFoto/scan_kk/<?php echo $kk;?>" width="50" height="50" alt=""></td>
-													<td><?php echo $keperluan;?></td>
 													<td><img src="../dataFoto/scan_ktp/<?php echo $ktp1;?>" width="50" height="50" alt=""></td>
 													<td><img src="../dataFoto/scan_ktp/<?php echo $ktp2;?>" width="50" height="50" alt=""></td>
+													<td><?php echo $keperluan;?></td>
 													<td class="fw-bold text-uppercase text-danger op-8"><?php echo $status;?></td>
 													<td><i><?php echo $keterangan;?></i></td>
 													<td>
